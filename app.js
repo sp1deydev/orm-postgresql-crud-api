@@ -9,9 +9,16 @@ const bodyParser = require('body-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-output.json');
 const connection = require('./connection/postgres');
+const db = require('./app/models');
 
 const API_PREFIX = CONSTANTS.API_PATH;
 const PORT = process.env.PORT || 3001;
+
+db.sequelize.sync({ force: true }) // force: true will drop & recreate tables
+    .then(() => {
+        console.log('Tables synced!')
+    })
+    .catch(err => console.error('Error syncing tables:', err));
 
 app.use(cors());
 app.use(morgan('dev'));

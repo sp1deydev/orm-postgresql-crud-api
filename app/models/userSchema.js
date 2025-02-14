@@ -11,13 +11,9 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     }
+}, {
+    timestamps: true 
 });
-
-sequelize.sync({ force: false }) // force: true will drop & recreate tables
-    .then(() => {
-        // console.log('Tables synced!')
-    })
-    .catch(err => console.error('Error syncing tables:', err));
 
 
 module.exports = User;
