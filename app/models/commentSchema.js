@@ -19,4 +19,8 @@ const Comment = sequelize.define('Comment', {
     timestamps: false 
 });
 
+Comment.associate = (models) => {
+    Comment.belongsTo(models.User, {foreignKey: 'userId', as: 'userInfo'})
+}
+
 module.exports = Comment;

@@ -12,9 +12,10 @@ const connection = require('./connection/postgres');
 const db = require('./app/models');
 
 const API_PREFIX = CONSTANTS.API_PATH;
+connection(); // connect to postgre database
 const PORT = process.env.PORT || 3001;
 
-db.sequelize.sync({ force: true }) // force: true will drop & recreate tables
+db.sequelize.sync({ force: false }) // force: true will drop & recreate tables
     .then(() => {
         console.log('Tables synced!')
     })
@@ -25,7 +26,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-connection(); // connect to postgre database
 
 app.use(API_PREFIX, routes);
 

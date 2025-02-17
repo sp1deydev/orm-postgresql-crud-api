@@ -12,5 +12,12 @@ const Comment = require('./commentSchema.js');
 db.User = User;
 db.Comment = Comment;
 
+//SETUP ASSOCIATIONS
+Object.keys(db).forEach((model) => {
+    if(db[model].associate) {
+        db[model].associate(db);
+    }
+})
+
 
 module.exports = db;

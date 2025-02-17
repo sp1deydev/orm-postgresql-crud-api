@@ -15,5 +15,8 @@ const User = sequelize.define('User', {
     timestamps: true 
 });
 
+User.associate = (models) => {
+    User.hasMany(models.Comment, {foreignKey: 'userId', as: 'userInfo'})
+}
 
 module.exports = User;
